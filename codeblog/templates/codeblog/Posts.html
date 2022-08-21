@@ -1,0 +1,143 @@
+{% extends 'codeblog/base.html' %}
+
+{% block title %}Post{% endblock %}
+
+{% block style %}
+<style>
+  ul {
+    list-style-type: none;
+  }
+  a{
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    font-size: 1.5em;
+  }
+  .card:hover, a:hover {
+    background-color: paleturquoise;
+    color: white;
+  }
+  .card {
+    background-color: white;
+  }
+
+  .code-title {
+    background-color: #CBE4F9;
+  }
+
+  .code-section {
+    height: 94vh;
+    overflow-y: scroll;
+  }
+
+  .back-link {
+    background-color: whitesmoke;
+    color: black;
+  }
+
+  .back-link:hover , .back-link a:hover {
+    background-color: navajowhite;
+    color: black;
+  }
+
+  ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6bdaff; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bf80ff; 
+}
+#smartphone-nav {
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+      #smartphone-nav {
+        display: block;
+      }
+
+      .desktop-navbar {
+        display: none;
+      }
+
+      .code-section {
+        height: 88vh;
+      }
+
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="container-fluid">
+	<div class="row">
+
+    <!-- Navbar Mobile -->
+    <div id="smartphone-nav">
+    <nav class="navbar navbar-expand-sm navbar-light" >
+            <a class="navbar-brand" href="#">Codehub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false" aria-label="Toggle navigation"
+            >
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                <ul class="navbar-nav ms-auto text-center">
+                  <li class="mt-1 p-2 card back-link" >
+                     <a class="back" href="{% url 'index' %}">Back</a>
+                  </li> 
+                  {% for content in post_content %}
+                    <li>
+                        <a class="nav-link" href="#{{content.heading|safe}}">{{content.heading|safe}}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </div>
+        </nav>
+      </div>
+
+		<!-- section heading -->
+		<section class="col-md-12 heading" style="background-color: palegoldenrod; height:4vh">
+			<h4>Posts</h4>
+		</section>
+
+    <!-- nav for desktop -->
+			<ul class="col-md-3 my-1 bg-light desktop-navbar" style="height:93vh;">
+
+        <li class="mt-1 p-2 card back-link" >
+           <a class="back" href="{% url 'index' %}">Back</a>
+         </li>
+
+         {% for content in post_content %}
+         <li class="mt-1 p-2 card">
+           <a href="#{{content.heading|safe}}">{{content.heading|safe}}</a>
+         </li>
+         {% endfor %}
+
+      </ul>
+
+		<section class="col-md-9 my-1 code-section">
+      {% for content in post_content %}
+      <div class="row m-1">
+			<h5 class="col my-2 py-3 code-title w-100" id="{{content.heading|safe}}">{{content.heading|safe}}</h5>
+      <p class="col-md-12 m-2">
+        {{content.code|safe}}
+      </p>
+      </div>
+      {% endfor %}
+		</section>
+	</div>
+</section>
+{% endblock %}

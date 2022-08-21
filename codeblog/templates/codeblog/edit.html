@@ -1,0 +1,54 @@
+{% extends 'codeblog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block style %}
+<style>
+.codebody {
+	background-color: paleturquoise;
+}
+
+.awesome_ckeditor {
+	background-color: red;
+}
+</style>
+{% endblock%}
+
+{% block content %}
+{% for message in messages %}
+    <div class="alert alert-primary" id="message" role="alert" style="text-align: center;">
+    	{{message}}
+    </div>
+{% endfor %}
+<section class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-md-8 my-3 card p-3">
+			<a href="{% url 'index' %}" class="btn btn-outline-primary w-25 my-3 btn-sm">&#8617; Back</a>
+			<h2>Edit Post Detail</h2>
+			<form method="POST" action="{% url 'edit' postId %}">
+				{% csrf_token %}
+				
+				{{genreform}}
+			    {{form|crispy}}
+			    <hr><h2>Edit Content</h2><br>
+
+				{% for contentform in formlist %}
+
+				<h4>Edit {{contentform.heading.value}}</h4>
+
+				<h6>{{contentform.heading}}</h6>
+
+				<div class="form-group">
+					{{contentform.media}}
+					<p>{{contentform.code|safe}}</p>
+				</div>
+
+				{% endfor %}
+
+				<input class="btn btn-outline-dark my-3 w-100 p-3" type="submit">
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock %}

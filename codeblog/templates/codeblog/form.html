@@ -1,0 +1,31 @@
+{% extends 'codeblog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Form
+{% endblock %}
+
+{% block content %}
+	<section class="container card my-3">
+		<form method='GET' action="{% url 'index' %}">
+		<a href="{% url 'index' %}">
+			<button class="btn btn-outline-primary w-25 my-2 btn-sm" name="back" type="submit" value="{{post}}">&#8617; Back</button>
+		</a>
+		</form>
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="form-group">
+					<form method="POST" action="">
+						{% csrf_token %}
+						{{Genre}}
+						<label>Or</label><br>
+						<label>Create a new Genre</label>
+					    <input name="genre-new" type="text" class="form-control"><hr>
+					    {{form}}
+					    <button type="submit" class="btn btn-outline-success btn-lg btn-block w-100 my-3">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

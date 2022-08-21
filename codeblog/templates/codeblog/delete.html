@@ -1,0 +1,25 @@
+{% extends 'codeblog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block style %}
+<style>
+.codebody {
+	background-color: paleturquoise;
+}
+</style>
+{% endblock%}
+
+{% block content %}
+<section class="container p-4">
+	<a href="{% url 'index' %}" class="btn btn-outline-primary w-25 my-3 btn-sm">&#8617; Back</a><br><br>
+	{{form}}
+	<br><h3>Do You Want To Delete This Post?</h3>
+	<form method="POST" action="">
+		{% csrf_token %}
+		<input type="submit" name="delete" class="btn btn-danger btn-lg m-3" value=" Yes! Delete">
+		<input type="submit" name="preserve" class="btn btn-warning btn-lg" value=" No! Don't Delete">
+	</form>
+</section>
+{% endblock %}

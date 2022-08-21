@@ -1,0 +1,112 @@
+{% extends 'codeblog/base.html' %}
+
+{% block title %}
+CodeBlog
+{% endblock %}
+
+{% block style %}
+<style>
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	color: peru;
+}
+
+body{animation: none;}
+
+.post {
+	animation: fadeInAnimation ease 0.5s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+.post-section {
+    height: 94vh;
+    overflow-y: scroll;
+  }
+ .genre-section {
+ 	height: 94vh;
+ 	overflow-y: scroll;
+ }
+
+
+ @media only screen and (max-width: 600px) {
+      .genre-section {
+        height: 100%;
+        overflow-y: auto;
+      }
+      .post-section {
+      	height: 100%;
+      	overflow-y: auto;
+      }
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Messages -->
+{% for message in messages %}
+<section id="message">
+<div class="alert alert-warning d-flex justify-content-between" style="text-align: center;" role="alert" >
+    {{message}}
+    <a style="cursor:pointer" onclick="fadeaway()"><span>&#x274C;</span></a>
+</div>
+</section>
+{% endfor %}
+
+<div class="container-fluid">
+
+	<!-- section row -->
+	<section class="row">
+
+		<!-- section heading -->
+		<section class="col-md-12 heading" style="background-color: paleturquoise;">
+			<h4>CodeHub</h4>
+		</section>
+
+		<!-- section navigation links -->
+		<section class="col-md-3 my-1 genre-section">
+			<div class="card m-2">
+			  <div class="card-header d-flex justify-content-between">
+			    Genres <a href="{% url 'genrepage' %}" class="btn btn-outline-info">Edit</a>
+			  </div>
+			  <ul class="list-group list-group-flush m-1 p-1">
+			  	<li class="list-group-item p-3"><a href="{% url 'index' %}">All</a></li>
+			  	{% for genre in genres %}
+			    <li class="list-group-item p-3"><a href="{% url 'index' %}?genre={{genre.name}}">{{genre.name}}</a></li>
+			    {% endfor %}
+			  </ul>
+  			<a class="btn btn-outline-dark m-3 p-3" href="{% url 'add' %}">Add Code</a>
+			</div>
+
+		</section>
+
+		<!-- section code posts -->
+		<section class="col-md-9 my-1 posts post-section px-5">
+
+			<div class="row">
+				{% for post in posts %}
+				<div class="card post border-{{post.importance}} text-{{post.importance}} bg-white mb-3 m-4" style="max-width: 18rem;">
+				  <div class="card-header">{{post.timestamp}}</div>
+				  <div class="card-body">
+				    <h5 class="card-title">{{post.title}}</h5>
+				    <p class="card-text">{{post.description}}</p>
+				    <a href="{% url 'view' post.id %}" id="postId" class="btn btn-primary w-100">View Code</a>
+				    <hr><a href="{% url 'edit' post.id %}" id="postId" class="btn btn-outline-success">Edit</a>
+				    <a href="{% url 'delete' post.id %}" id="postId" class="btn btn-outline-danger w-50">Delete</a>
+				  </div>
+				</div>
+				{% empty %}
+				<h2 class="ml-3 mt-3">No Code...</h2>
+				{% endfor %}
+			</div>
+
+		</section>
+
+	</section>
+
+</div>
+{% endblock %}

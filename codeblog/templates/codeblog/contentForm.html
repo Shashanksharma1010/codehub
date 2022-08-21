@@ -1,0 +1,27 @@
+{% extends 'codeblog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}AddCode{% endblock %}
+
+{% block content %}
+<section class="container card my-3">
+	<div class="row justify-content-center">
+		<div class="col-md-12 m-3">
+			<form method="GET" action="{% url 'add' %}">
+			<a href="{% url 'add' %}" >
+				<button type="submit" class="btn btn-outline-primary w-25 my-2 btn-sm" name="back" value="{{post}}">&#x274C; Cancel</button>
+			</a>
+			</form>
+			<form method="POST" action="">
+				{% csrf_token %}
+				{{form.media}}
+				{{form|crispy}}
+				<div style="display:flex">
+				<button href="/" type="submit" value="clicked" name="createBlock" class="btn btn-outline-primary btn-lg btn-block w-50 my-4 m-1">Add Another Block</button>
+				<button type="submit" name="submit" value="clicked" class="btn btn-outline-success btn-lg btn-block w-50 my-4 m-1">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock %}
