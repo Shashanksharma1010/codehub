@@ -12,8 +12,8 @@
 {% endblock%}
 
 {% block content %}
-<section class="container p-4">
-	<a href="{% url 'index' %}" class="btn btn-outline-primary w-25 my-3 btn-sm">&#8617; Back</a><br><br>
+<section class="container bg-white p-4 shadow-lg my-3">
+	<a href="{% url 'index' %}" class="btn btn-outline-warning w-25 my-3 btn-sm">&#8617; Back</a><br><br>
 	{{form}}
 	<br><h3>Do You Want To Delete This Post?</h3>
 	<form method="POST" action="">

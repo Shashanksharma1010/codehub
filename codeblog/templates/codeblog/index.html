@@ -63,13 +63,13 @@ body{animation: none;}
 	<section class="row">
 
 		<!-- section heading -->
-		<section class="col-md-12 heading" style="background-color: paleturquoise;">
+		<section class="col-md-12 heading" style="background-color: #f5ce42;">
 			<h4>CodeHub</h4>
 		</section>
 
 		<!-- section navigation links -->
 		<section class="col-md-3 my-1 genre-section">
-			<div class="card m-2">
+			<div class="card m-2 shadow-lg">
 			  <div class="card-header d-flex justify-content-between">
 			    Genres <a href="{% url 'genrepage' %}" class="btn btn-outline-info">Edit</a>
 			  </div>
@@ -89,12 +89,12 @@ body{animation: none;}
 
 			<div class="row">
 				{% for post in posts %}
-				<div class="card post border-{{post.importance}} text-{{post.importance}} bg-white mb-3 m-4" style="max-width: 18rem;">
+				<div class="card post border-{{post.importance}} text-{{post.importance}} bg-white mb-3 m-4 shadow-lg" style="max-width: 18rem;">
 				  <div class="card-header">{{post.timestamp}}</div>
 				  <div class="card-body">
 				    <h5 class="card-title">{{post.title}}</h5>
 				    <p class="card-text">{{post.description}}</p>
-				    <a href="{% url 'view' post.id %}" id="postId" class="btn btn-primary w-100">View Code</a>
+				    <a href="{% url 'view' post.id %}" id="postId" class="btn btn-secondary w-100">View Code</a>
 				    <hr><a href="{% url 'edit' post.id %}" id="postId" class="btn btn-outline-success">Edit</a>
 				    <a href="{% url 'delete' post.id %}" id="postId" class="btn btn-outline-danger w-50">Delete</a>
 				  </div>

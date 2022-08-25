@@ -2,8 +2,10 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import Genre, Post, Content
 from .forms import *
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
 	genres = Genre.objects.all()
 	data = request.GET
@@ -28,6 +30,7 @@ def index(request):
 
 
 # This view Creates a new Code Post
+@login_required
 def AddCode(request):
 	if request.method == 'POST':
 		data = request.POST
@@ -56,7 +59,7 @@ def AddCode(request):
 			importance = data['importance']
 			)
 		    post.save()	
-
+			
 		return redirect('content', data['title'])
 
 	if request.method == 'GET':
@@ -77,6 +80,7 @@ def AddCode(request):
 	return render(request, 'codeblog/form.html', context)
 
 # This view takes code inputs with their respective titles.
+@login_required
 def addCodeContent(request, post):
 	if request.method == 'POST':
 		data = request.POST
@@ -103,6 +107,7 @@ def addCodeContent(request, post):
 	}
 	return render(request, 'codeblog/contentForm.html', context)
 
+@login_required
 def ViewPost(request, pk):
 	post = Post.objects.get(pk=pk)
 	post_content = post.content_set.all()
@@ -111,6 +116,7 @@ def ViewPost(request, pk):
 	}
 	return render(request, 'codeblog/Posts.html', context)
 
+@login_required
 def EditPost(request, pk):
 	post = Post.objects.get(pk=pk)
 	form = CodeForm(instance=post)
@@ -151,6 +157,7 @@ def EditPost(request, pk):
 
 	return render(request, 'codeblog/edit.html', context)
 
+@login_required
 def DeletePost(request, pk):
 	post = Post.objects.get(pk=pk)
 	form = CodeForm(instance=post)
@@ -167,6 +174,7 @@ def DeletePost(request, pk):
 	}
 	return render(request, 'codeblog/delete.html', context)
 
+@login_required
 def GenrePage(request):
 	genres = Genre.objects.all()
 	form = GenreSelect()

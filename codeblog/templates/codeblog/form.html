@@ -6,10 +6,10 @@ Form
 {% endblock %}
 
 {% block content %}
-	<section class="container card my-3">
+	<section class="container card my-3 shadow-lg">
 		<form method='GET' action="{% url 'index' %}">
 		<a href="{% url 'index' %}">
-			<button class="btn btn-outline-primary w-25 my-2 btn-sm" name="back" type="submit" value="{{post}}">&#8617; Back</button>
+			<button class="btn btn-outline-warning w-25 my-2 btn-sm" name="back" type="submit" value="{{post}}">&#8617; Back</button>
 		</a>
 		</form>
 		<div class="row justify-content-center">

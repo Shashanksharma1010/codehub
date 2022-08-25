@@ -23,8 +23,8 @@
 {% endfor %}
 <section class="container-fluid">
 	<div class="row justify-content-center">
-		<div class="col-md-8 my-3 card p-3">
-			<a href="{% url 'index' %}" class="btn btn-outline-primary w-25 my-3 btn-sm">&#8617; Back</a>
+		<div class="col-md-8 my-3 card p-3 shadow-lg">
+			<a href="{% url 'index' %}" class="btn btn-outline-warning w-25 my-3 btn-sm">&#8617; Back</a>
 			<h2>Edit Post Detail</h2>
 			<form method="POST" action="{% url 'edit' postId %}">
 				{% csrf_token %}

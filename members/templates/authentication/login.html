@@ -1,0 +1,70 @@
+{% extends 'codeblog/base.html' %}
+
+{% block title %}Post{% endblock %}
+
+{% block style %}
+<style>
+    section {
+        width: 50%;
+    }
+
+    input {
+        padding: 1rem 5rem;
+    }
+
+    input:focus {
+        outline:none;
+        border: 2px solid purple;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    div {
+        position: relative;
+    }
+
+    div i {
+        position: absolute;
+        top:0;
+        font-size: 1.75rem;
+        background-color: #f5ce42;
+        margin: 0.1rem;
+        width: 60px;
+        padding:1rem;
+        bottom:0;
+        left:0;
+        right:0;
+    }
+
+    @media only screen and (max-width: 600px) {
+        section {
+            width: 90%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Messages -->
+{% for message in messages %}
+    <div class="alert alert-secondary" id="message" role="alert" style="text-align: center;">
+    	{{message}}
+    </div>
+{% endfor %}
+
+<section class="bg-white card m-5 p-5 d-block mx-auto shadow-lg">
+    <form method="post" action="">
+        {%  csrf_token %}
+        
+        <h3 class="text-center w-100">LOGIN</h3><hr>
+        <div>
+            <i class='fa-solid fa-user'></i>
+            <input type="text" name="username" placeholder="Enter Username" class="d-block mx-auto m-5 w-100">
+        </div>
+        <div>
+            <i class="fa-solid fa-key"></i>
+            <input type="password" name="password"  placeholder="Enter Password" class="d-block mx-auto m-5 w-100">
+        </div>
+        <input type="submit" class="btn btn-primary d-block mx-auto p-3 w-100">
+    </form>
+</section>
+{% endblock %}
