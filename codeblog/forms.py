@@ -17,7 +17,7 @@ class CodeForm(forms.ModelForm):
 		fields = ('title', 'description', 'importance')
 		widgets = {
 		   'title': forms.TextInput(attrs={'class': 'form-control'}),
-		   'description': forms.Textarea(attrs={'class': 'form-control'}),
+		   'description': forms.Textarea(attrs={'class': 'form-control w-100'}),
 		   'importance': forms.Select(attrs={'class': 'form-control'})
 		}
 
