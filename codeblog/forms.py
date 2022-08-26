@@ -17,7 +17,7 @@ class CodeForm(forms.ModelForm):
 		fields = ('title', 'description', 'importance')
 		widgets = {
 		   'title': forms.TextInput(attrs={'class': 'form-control'}),
-		   'description': forms.Textarea(attrs={'class': 'form-control w-100'}),
+		   'description': forms.Textarea(attrs={'class': 'form-control'}),
 		   'importance': forms.Select(attrs={'class': 'form-control'})
 		}
 
@@ -26,6 +26,6 @@ class ContentForm(forms.ModelForm):
 		model = Content
 		fields = ['heading', 'code']
 		widgets = {
-		    'heading': forms.TextInput(attrs={'class': 'form-control'}),
+		    'heading': forms.TextInput(attrs={'class': 'form-control w-100'}),
 		    'code': forms.Textarea(attrs={'class':'form-control'})
 		}
