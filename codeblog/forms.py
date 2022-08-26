@@ -26,6 +26,6 @@ class ContentForm(forms.ModelForm):
 		model = Content
 		fields = ['heading', 'code']
 		widgets = {
-		    'heading': forms.TextInput(attrs={'class': 'form-control w-100'}),
+		    'heading': forms.TextInput(attrs={'class': 'form-control'}),
 		    'code': forms.Textarea(attrs={'class':'form-control'})
 		}
